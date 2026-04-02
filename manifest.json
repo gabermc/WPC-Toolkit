@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "WPC Toolkit",
+  "version": "2.1.0",
+  "description": "All-in-one QA toolkit: Report, Checklist, QuickText, CountryScan, ShopApp Helper & Widget Organizer.",
+  "permissions": ["activeTab", "scripting", "storage", "tabs", "clipboardWrite", "webNavigation"],
+  "host_permissions": [
+    "https://opstools-p1-br.ecom-qa.samsung.com/*",
+    "https://opstools-p1-pe.ecom-qa.samsung.com/*",
+    "https://opstools-p1-cl.ecom-qa.samsung.com/*",
+    "https://opstools-p1-co.ecom-qa.samsung.com/*",
+    "https://opstools-p1-mx.ecom-qa.samsung.com/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://opstools-p1-br.ecom-qa.samsung.com/ops-web/shopcms/widgets/Offerv2?store_id=br&device_type=default&site_id=br",
+        "https://opstools-p1-pe.ecom-qa.samsung.com/ops-web/shopcms/widgets/Offerv2?store_id=pe&device_type=default&site_id=pe",
+        "https://opstools-p1-cl.ecom-qa.samsung.com/ops-web/shopcms/widgets/Offerv2?store_id=cl&device_type=default&site_id=cl",
+        "https://opstools-p1-co.ecom-qa.samsung.com/ops-web/shopcms/widgets/Offerv2?store_id=co&device_type=default&site_id=co",
+        "https://opstools-p1-mx.ecom-qa.samsung.com/ops-web/shopcms/widgets/Offerv2?store_id=mx&device_type=default&site_id=mx"
+      ],
+      "js": ["scripts/shopapp-content.js"],
+      "css": ["scripts/shopapp-content.css"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/countryscan-content.js"]
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["scripts/widget-organizer.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "64": "icons/icon64.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["models/*.xlsx"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
